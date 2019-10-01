@@ -1,0 +1,25 @@
+---
+title: "Class Sample Data"
+author: "Molly Chiang"
+date: "10/1/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, messages = FALSE)
+library(googlesheets4)
+library(tidyverse)
+```
+
+```{r}
+sheets_deauth()
+data <- read_sheet("1cgP-e6THVfiW5TJ95QhX3jkNxKvc8Sicp9k_BkSRd2I")
+
+data %>% filter(is.na(red) == FALSE) %>% filter(is.na(white) == FALSE) %>% mutate(prop = red/25) %>%
+  ggplot(aes(x=prop)) +
+  geom_histogram() +
+  stat_bin(bins = 10)
+  
+
+```
+
